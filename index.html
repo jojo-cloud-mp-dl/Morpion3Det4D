@@ -39,10 +39,10 @@
   --text:#dcdcf5;--text2:#7878a0;--text3:#3c3c5c;
   /* P1 : rouge-rose doux (moins saturé) */
   --p1:#e05070;--p1d:#a83050;--p1l:#f08898;
-  --p1bg:rgba(224,80,112,.09);--p1bg2:rgba(224,80,112,.19);
+  --p1bg:rgba(224,80,112,.18);--p1bg2:rgba(224,80,112,.32);
   /* P2 : bleu-cyan apaisé */
   --p2:#30b8d8;--p2d:#1888a8;--p2l:#70d8f0;
-  --p2bg:rgba(48,184,216,.09);--p2bg2:rgba(48,184,216,.19);
+  --p2bg:rgba(48,184,216,.22);--p2bg2:rgba(48,184,216,.35);
   /* Victoire : vert doux au lieu de vert fluo */
   --win:#50d898;--winbg:rgba(80,216,152,.13);
   --gold:#d4a820;--accent:#6040d0;--accent2:#9060d8;
@@ -59,7 +59,7 @@ body.light{
   --p1bg:rgba(192,64,96,.10);--p1bg2:rgba(192,64,96,.20);
   /* P2 light : bleu-cyan moins criard */
   --p2:#1890b8;--p2d:#106888;--p2l:#50b8d8;
-  --p2bg:rgba(24,144,184,.10);--p2bg2:rgba(24,144,184,.20);
+  --p2bg:rgba(24,144,184,.22);--p2bg2:rgba(24,144,184,.38);
   --win:#30a870;--winbg:rgba(48,168,112,.13);
   --gold:#b88a10;--accent:#5030b0;--accent2:#7848c8;
   --w1:#5820cc;--w2:#20a858;--w3:#1890b8;
@@ -250,6 +250,53 @@ body::before{
 }
 .timer-opt:hover{border-color:var(--border3);color:var(--text)}
 .timer-opt.sel{border-color:var(--p2);background:rgba(0,212,255,.1);color:var(--p2)}
+/* Online sub-menu in setup */
+#online-sub-row{display:flex;flex-direction:column;gap:8px;padding:10px;background:var(--bg3);border-radius:var(--r);border:1px solid var(--border);animation:fadeIn .2s ease}
+.online-sub-section{display:flex;flex-direction:column;gap:6px}
+.online-sub-title{font-size:9px;font-family:'Orbitron',monospace;color:var(--text3);letter-spacing:2px;text-transform:uppercase;padding-bottom:4px;border-bottom:1px solid var(--border)}
+.online-sub-btns{display:flex;gap:6px;flex-wrap:wrap}
+.online-mode-btn{
+  flex:1;min-width:90px;padding:8px 10px;border-radius:var(--r);border:1px solid var(--border2);
+  cursor:pointer;text-align:center;font-size:11px;font-weight:600;
+  color:var(--text3);transition:.15s;font-family:'Orbitron',monospace;background:var(--bg4);
+}
+.online-mode-btn:hover{border-color:var(--border3);color:var(--text)}
+.online-mode-btn.sel{border-color:var(--p2);background:rgba(48,184,216,.12);color:var(--p2)}
+.online-mode-btn.host-btn.sel{border-color:var(--accent2);background:rgba(144,96,216,.12);color:var(--accent2)}
+/* Public lobby list */
+#lobby-list-wrap{display:none;flex-direction:column;gap:6px;margin:0 16px 8px;max-height:240px;overflow-y:auto}
+#lobby-list-wrap.show{display:flex}
+.lobby-entry{
+  display:flex;align-items:center;justify-content:space-between;gap:10px;
+  padding:10px 14px;border-radius:var(--r2);background:var(--bg2);border:1px solid var(--border2);
+  animation:fadeIn .2s ease;
+}
+.lobby-entry:hover{border-color:var(--border3)}
+.lobby-entry-info{display:flex;flex-direction:column;gap:2px}
+.lobby-entry-name{font-size:12px;font-weight:700;color:var(--text);font-family:'Orbitron',monospace;letter-spacing:.5px}
+.lobby-entry-rules{font-size:10px;color:var(--text3)}
+.lobby-entry-rules span{color:var(--accent2);font-weight:600}
+.lobby-join-btn{
+  padding:6px 14px;border-radius:var(--r);background:var(--p2d);border:none;
+  color:#fff;font-size:11px;font-weight:700;cursor:pointer;transition:.15s;
+  font-family:'Orbitron',monospace;letter-spacing:.5px;white-space:nowrap;
+}
+.lobby-join-btn:hover{filter:brightness(1.15);transform:scale(1.04)}
+.lobby-empty{font-size:11px;color:var(--text3);text-align:center;padding:16px;font-family:'Orbitron',monospace;letter-spacing:1px}
+.lobby-header{display:flex;align-items:center;justify-content:space-between;padding:0 2px 4px;border-bottom:1px solid var(--border);margin-bottom:2px}
+.lobby-header-title{font-size:9px;font-family:'Orbitron',monospace;color:var(--text3);letter-spacing:2px}
+.lobby-header-count{font-size:9px;color:var(--accent2);font-family:'Orbitron',monospace}
+.lobby-dot{width:6px;height:6px;border-radius:50%;background:var(--win);display:inline-block;margin-right:4px;animation:blink 1.4s ease-in-out infinite}
+/* Host waiting badge in game (public) */
+#public-host-badge{
+  display:none;background:linear-gradient(135deg,rgba(144,96,216,.15),rgba(48,184,216,.1));
+  border:1px solid var(--accent);border-radius:var(--r);padding:8px 14px;
+  margin:0 16px 8px;font-size:11px;color:var(--accent2);font-family:'Orbitron',monospace;
+  letter-spacing:.5px;align-items:center;gap:10px;
+}
+#public-host-badge.show{display:flex}
+.pub-badge-dot{width:8px;height:8px;border-radius:50%;background:var(--gold);animation:blink .8s ease-in-out infinite;flex-shrink:0}
+
 /* Launch button */
 #launch-btn{
   padding:18px;border-radius:var(--r2);font-size:18px;font-weight:900;
@@ -416,8 +463,8 @@ body::before{
 }
 .cell4:hover:not([data-p]){border-color:var(--border3);background:var(--bg4);transform:scale(1.07)}
 .cell4[data-p]{cursor:default}
-.cell4[data-p="1"]{background:var(--p1bg);border-color:var(--p1d)}
-.cell4[data-p="2"]{background:var(--p2bg);border-color:var(--p2d)}
+.cell4[data-p="1"]{background:var(--p1bg);border-color:var(--p1);border-width:2px}
+.cell4[data-p="2"]{background:var(--p2bg);border-color:var(--p2);border-width:2px}
 .cell4.pending{outline:2px solid var(--accent);outline-offset:2px;animation:pendPulse .8s ease-in-out infinite}
 @keyframes pendPulse{0%,100%{outline-color:var(--accent)}50%{outline-color:var(--accent2)}}
 .cell4.won{background:var(--winbg);border-color:var(--win);animation:wonPop .4s ease}
@@ -596,7 +643,7 @@ body::before{
       <div class="menu-btn secondary" onclick="openSettings('main')">⚙️ &nbsp;Paramètres</div>
       <div class="menu-btn secondary" onclick="openSettings('updates')">🆕 &nbsp;Mises à jour</div>
     </div>
-    <div class="menu-version">v5.6 — 1 mai 2026</div>
+    <div class="menu-version">v5.8 — 1 mai 2026</div>
   </div>
 </div>
 
@@ -668,6 +715,29 @@ body::before{
       <!-- Updates -->
       <div id="stab-updates-content" class="settings-section" style="display:none">
         <div class="upd-entry">
+          <div class="upd-ver">v5.8 — REFONTE MULTIJOUEUR</div>
+          <div class="upd-date">1 mai 2026 · 21h00</div>
+          <ul class="upd-list">
+            <li>Écran Configuration — le bouton "Multijoueur" affiche un sous-menu directement dans la configuration, avant de lancer la partie</li>
+            <li>Partie Privée — deux boutons : "Hôte" (génère un code à partager) et "Rejoindre" (saisie du code)</li>
+            <li>Partie Publique — "Créer partie publique" publie la partie dans Firebase avec les règles choisies (3D/4D, Score/Classique)</li>
+            <li>Partie Publique — "Recherche publique" affiche la liste en temps réel de toutes les parties en attente avec leurs règles et l'âge de l'annonce</li>
+            <li>L'invité choisit librement la partie qui lui convient et clique sur "Rejoindre"</li>
+            <li>Firebase URL mise à jour : europe-west1 (projet Morpion3Det4D)</li>
+            <li>Suppression du tirage aléatoire hôte/invité — l'hôte est toujours celui qui crée la partie</li>
+            <li>Badge animé "En attente" visible dans l'écran de jeu pendant que l'hôte public attend un adversaire</li>
+          </ul>
+        </div>
+        <div class="upd-entry old">
+          <div class="upd-ver">v5.7 — LISIBILITÉ CELLULES 4D</div>
+          <div class="upd-date">1 mai 2026 · 19h30</div>
+          <ul class="upd-list">
+            <li>Cellules J2 (ronds bleus) — fond plus foncé : opacité passée de 9% à 22%, bordure utilise la couleur principale --p2 au lieu de --p2d</li>
+            <li>Cellules J1 (croix rouges) — même traitement pour la cohérence visuelle : opacité 18%, bordure --p1</li>
+            <li>Bordures des cellules occupées épaissies à 2px pour mieux les distinguer des cases vides</li>
+          </ul>
+        </div>
+        <div class="upd-entry old">
           <div class="upd-ver">v5.6 — HALOS DE VICTOIRE PAR JOUEUR</div>
           <div class="upd-date">1 mai 2026 · 19h00</div>
           <ul class="upd-list">
@@ -783,8 +853,28 @@ body::before{
           <div class="opp-opt" id="opp-online" onclick="selectOpp('online')">
             <div class="opp-icon">🌐</div>
             <div>
-              <div class="opp-label">En ligne (P2P)</div>
-              <div class="opp-desc">Multijoueur via code de partie</div>
+              <div class="opp-label">Multijoueur</div>
+              <div class="opp-desc">Privé ou partie publique en ligne</div>
+            </div>
+          </div>
+
+          <!-- Sous-menu multijoueur -->
+          <div id="online-sub-row" style="display:none">
+            <!-- Privé -->
+            <div class="online-sub-section">
+              <div class="online-sub-title">🔒 Partie privée avec code</div>
+              <div class="online-sub-btns">
+                <div class="online-mode-btn host-btn" id="omBtn-host-private" onclick="selectOnlineMode('host-private')">🎮 Hôte</div>
+                <div class="online-mode-btn" id="omBtn-join-private" onclick="selectOnlineMode('join-private')">🔗 Rejoindre</div>
+              </div>
+            </div>
+            <!-- Public -->
+            <div class="online-sub-section">
+              <div class="online-sub-title">🌐 Partie en ligne</div>
+              <div class="online-sub-btns">
+                <div class="online-mode-btn host-btn" id="omBtn-host-public" onclick="selectOnlineMode('host-public')">📡 Créer partie publique</div>
+                <div class="online-mode-btn" id="omBtn-join-public" onclick="selectOnlineMode('join-public')">🔍 Recherche publique</div>
+              </div>
             </div>
           </div>
         </div>
@@ -910,6 +1000,22 @@ body::before{
   <div id="online-panel">
     <div class="settings-title">MODE EN LIGNE — WebRTC P2P</div>
     <div id="online-content"></div>
+  </div>
+
+  <!-- Public lobby list (join-public mode) -->
+  <div id="lobby-list-wrap">
+    <div class="lobby-header">
+      <span class="lobby-header-title"><span class="lobby-dot"></span>PARTIES DISPONIBLES</span>
+      <span class="lobby-header-count" id="lobby-count">0 partie(s)</span>
+    </div>
+    <div id="lobby-entries"></div>
+  </div>
+
+  <!-- Public host waiting badge -->
+  <div id="public-host-badge">
+    <div class="pub-badge-dot"></div>
+    <span id="pub-badge-text">En attente d'un adversaire…</span>
+    <button onclick="cancelPublicHost()" style="margin-left:auto;padding:4px 10px;border-radius:var(--r);background:var(--bg4);border:1px solid var(--border3);color:var(--text3);cursor:pointer;font-size:10px;font-family:'Orbitron',monospace">Annuler</button>
   </div>
 
   <!-- Chat -->
@@ -1126,11 +1232,21 @@ function toggleTheme(){
 // SETUP SCREEN STATE
 // ══════════════════════════════════════════════════════
 let setupOpp='local', setupDiff='medium', setupDim='4d', setupRules='score', setupTimer=0;
+let setupOnlineMode=null; // 'host-private'|'join-private'|'host-public'|'join-public'
 
 function selectOpp(v){
   setupOpp=v;
   ['local','bot','online'].forEach(o=>document.getElementById('opp-'+o).classList.toggle('sel',o===v));
   document.getElementById('diff-row').style.display=v==='bot'?'flex':'none';
+  document.getElementById('online-sub-row').style.display=v==='online'?'flex':'none';
+  if(v!=='online'){setupOnlineMode=null}
+}
+function selectOnlineMode(v){
+  setupOnlineMode=v;
+  ['host-private','join-private','host-public','join-public'].forEach(m=>{
+    const el=document.getElementById('omBtn-'+m);
+    if(el)el.classList.toggle('sel',m===v);
+  });
 }
 function selectDiff(v){
   setupDiff=v;
@@ -1299,10 +1415,13 @@ function configureAndStart(){
   timerSeconds=setupTimer||30;
   const dim=setupDim; // '3d' or '4d'
 
+  // Hide lobby list / badge initially
+  document.getElementById('lobby-list-wrap').classList.remove('show');
+  document.getElementById('public-host-badge').classList.remove('show');
+
   if(setupOpp==='online'){
-    // Online: show online panel
     document.getElementById('online-panel').classList.add('show');
-    renderOnlineWelcome();
+    _startOnlineFlow();
   } else {
     document.getElementById('online-panel').classList.remove('show');
   }
@@ -1323,6 +1442,23 @@ function configureAndStart(){
     if(!renderer4v)initViz4D();
     reset4D();
   }
+}
+
+function _startOnlineFlow(){
+  const om=setupOnlineMode;
+  const oc=document.getElementById('online-content');
+  if(!om){
+    // No sub-mode chosen yet — show instruction
+    oc.innerHTML='';
+    const msg=document.createElement('div');msg.style.cssText='font-size:11px;color:var(--text3);padding:4px 0';
+    msg.textContent='Choisissez un mode multijoueur dans la configuration ci-dessus.';
+    oc.appendChild(msg);
+    return;
+  }
+  if(om==='host-private')  { loadPeerJS(()=>hostGame()); return; }
+  if(om==='join-private')  { showJoinUI(); return; }
+  if(om==='host-public')   { loadPeerJS(()=>loadFirebase(()=>hostPublicGame())); return; }
+  if(om==='join-public')   { loadPeerJS(()=>loadFirebase(()=>showPublicLobby())); return; }
 }
 
 function setStatus(msg,win){
@@ -2141,146 +2277,120 @@ function showReplay(){
 function closeReplay(){document.getElementById('replay-overlay').classList.remove('show')}
 
 // ══════════════════════════════════════════════════════
+// ══════════════════════════════════════════════════════
 // SÉCURITÉ — Utilitaires de sanitisation
 // ══════════════════════════════════════════════════════
-/**
- * Convertit une chaîne en texte sûr (échappe HTML).
- * Utilisé partout où on insère du contenu provenant d'un pair.
- */
 function sanitizeText(str){
   if(typeof str!=='string')return'';
-  // Tronque puis encode via un nœud texte DOM — aucune exécution possible
   const div=document.createElement('div');
   div.appendChild(document.createTextNode(str.slice(0,200)));
-  return div.innerHTML; // résultat HTML-échappé, sûr pour innerHTML si besoin
+  return div.innerHTML;
 }
-
-/** Valide qu'une valeur est un entier dans [0,2] */
 function isValidCoord(v){return Number.isInteger(v)&&v>=0&&v<=2}
-
-/** Valide un message de mouvement reçu via PeerJS */
 function validateMoveData(d){
   if(!d||typeof d!=='object')return false;
-  if(d.mode==='3d'){
-    return isValidCoord(d.x)&&isValidCoord(d.y)&&isValidCoord(d.z);
-  }
-  if(d.mode==='4d'){
-    return isValidCoord(d.x)&&isValidCoord(d.y)&&isValidCoord(d.z)&&isValidCoord(d.w);
-  }
+  if(d.mode==='3d')return isValidCoord(d.x)&&isValidCoord(d.y)&&isValidCoord(d.z);
+  if(d.mode==='4d')return isValidCoord(d.x)&&isValidCoord(d.y)&&isValidCoord(d.z)&&isValidCoord(d.w);
   return false;
 }
-
-/** Valide un code de partie (alphanumérique + tiret, max 12 caractères) */
-function sanitizeCode(raw){
-  return String(raw).replace(/[^A-Z0-9\-]/gi,'').toUpperCase().slice(0,12);
-}
-
-// Rate-limiting : max 30 messages reçus par seconde pour éviter le flood
+function sanitizeCode(raw){return String(raw).replace(/[^A-Z0-9\-]/gi,'').toUpperCase().slice(0,12)}
 let _peerMsgCount=0,_peerMsgResetAt=0;
 function peerRateLimitOk(){
   const now=Date.now();
   if(now>_peerMsgResetAt){_peerMsgCount=0;_peerMsgResetAt=now+1000}
-  _peerMsgCount++;
-  return _peerMsgCount<=30;
+  _peerMsgCount++;return _peerMsgCount<=30;
 }
 
 // ══════════════════════════════════════════════════════
-// ONLINE — PeerJS (sécurisé) + Matchmaking Firebase
+// ONLINE — constantes & état
 // ══════════════════════════════════════════════════════
-let onlinePanelOpen=false,peer=null,conn=null;
 const PEER_HOST='0.peerjs.com',PEER_PORT=443,PEER_PATH='/';
+const FB_URL='https://morpion3det4d-default-rtdb.europe-west1.firebasedatabase.app';
+let peer=null,conn=null;
+let fbLoaded=false,fbWatcher=null,myLobbyKey=null,fbRoomRef=null;
 
-// Firebase RTDB (projet public dédié au matchmaking uniquement)
-// Aucune donnée de jeu n'y transite — seulement les peer-IDs pour la connexion initiale.
-const FB_URL='https://morpion3d4d-default-rtdb.firebaseio.com';
-let fbRoomRef=null; // référence de salon publique en cours
-
-function toggleOnline(){
-  onlinePanelOpen=!onlinePanelOpen;
-  const p=document.getElementById('online-panel');
-  p.classList.toggle('show',onlinePanelOpen);
-  if(onlinePanelOpen&&!onlineMode)renderOnlineWelcome();
-}
-
-function renderOnlineWelcome(){
-  const oc=document.getElementById('online-content');
-  oc.innerHTML='';
-  const desc=document.createElement('div');
-  desc.style.cssText='font-size:11px;color:var(--text3);margin-bottom:10px';
-  desc.textContent='Jouez avec un ami ou trouvez un adversaire aléatoire.';
-  oc.appendChild(desc);
-  const row=document.createElement('div');
-  row.style.cssText='display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px';
-  const b1=document.createElement('button');b1.className='online-btn';b1.textContent='🔒 Partie Privée';b1.onclick=renderPrivateOptions;
-  const b2=document.createElement('button');b2.className='online-btn';b2.style.background='var(--p2d)';b2.textContent='🌐 Recherche Publique';b2.onclick=renderPublicSearch;
-  row.appendChild(b1);row.appendChild(b2);
-  oc.appendChild(row);
-}
-
-// ─── Option A : Partie Privée ─────────────────────────
-function renderPrivateOptions(){
-  const oc=document.getElementById('online-content');
-  oc.innerHTML='';
-  const title=document.createElement('div');title.className='online-role';title.textContent='PARTIE PRIVÉE';oc.appendChild(title);
-  const row=document.createElement('div');row.style.cssText='display:flex;gap:8px;flex-wrap:wrap;margin-top:8px';
-  const b1=document.createElement('button');b1.className='online-btn';b1.textContent='🎮 Créer';b1.onclick=hostGame;
-  const b2=document.createElement('button');b2.className='online-btn';b2.style.background='var(--bg4)';b2.style.border='1px solid var(--border3)';b2.style.color='var(--text2)';b2.textContent='🔗 Rejoindre par code';b2.onclick=showJoinUI;
-  const b3=document.createElement('button');b3.className='online-btn';b3.style.cssText='background:var(--bg3);border:1px solid var(--border2);color:var(--text3)';b3.textContent='← Retour';b3.onclick=renderOnlineWelcome;
-  row.appendChild(b1);row.appendChild(b2);row.appendChild(b3);oc.appendChild(row);
-}
-
-function genCode(){return Math.random().toString(36).substr(2,6).toUpperCase()}
+// ══════════════════════════════════════════════════════
+// ONLINE — utilitaires communs
+// ══════════════════════════════════════════════════════
 function destroyPeer(){
   cleanFbRoom();
   try{if(conn)conn.close()}catch(e){}
   try{if(peer)peer.destroy()}catch(e){}
   peer=null;conn=null;
 }
-function hostGame(){
-  destroyPeer();const code='MRP-'+genCode();
-  const oc=document.getElementById('online-content');
-  oc.innerHTML='';
-  const st=document.createElement('div');st.className='online-status';
-  st.innerHTML='<div class="online-dot waiting"></div>';
-  const stTxt=document.createTextNode('Initialisation…');
-  st.appendChild(stTxt);oc.appendChild(st);
-  loadPeerJS(()=>{
-    peer=new Peer(code,{host:PEER_HOST,port:PEER_PORT,path:PEER_PATH,secure:true});
-    peer.on('open',id=>{
-      onlineRole='p1';
-      oc.innerHTML='';
-      const s2=document.createElement('div');s2.className='online-status';
-      s2.innerHTML='<div class="online-dot waiting"></div>';s2.appendChild(document.createTextNode('En attente…'));oc.appendChild(s2);
-      const role=document.createElement('div');role.className='online-role';role.textContent='JOUEUR 1 (HÔTE)';oc.appendChild(role);
-      const cd=document.createElement('div');cd.className='code-display';cd.textContent=id;oc.appendChild(cd);
-      const copyBtn=document.createElement('button');copyBtn.className='online-btn';copyBtn.textContent='📋 Copier';
-      copyBtn.onclick=()=>copyCode(id);oc.appendChild(copyBtn);
-    });
-    peer.on('connection',c=>{
-      conn=c;setupConn();onlineMode=true;
-      oc.innerHTML='';
-      const s3=document.createElement('div');s3.className='online-status';
-      s3.innerHTML='<div class="online-dot connected"></div>';s3.appendChild(document.createTextNode('Connecté !'));oc.appendChild(s3);
-      const role=document.createElement('div');role.className='online-role';
-      role.textContent='JOUEUR 1 — CODE: '+sanitizeText(peer.id);oc.appendChild(role);
-      const discBtn=document.createElement('button');discBtn.className='online-btn';
-      discBtn.style.cssText='background:var(--bg4);border:1px solid var(--border3);color:var(--text2)';
-      discBtn.textContent='Déconnecter';discBtn.onclick=disconnectOnline;oc.appendChild(discBtn);
-      startFresh();setStatus('En ligne · Vous êtes J1');
-    });
-    peer.on('error',err=>showOnlineError(err.message));
-  });
+function cleanFbRoom(){
+  if(fbWatcher){try{window.firebase&&window.firebase.database().ref('lobby').off('value',fbWatcher)}catch(e){}fbWatcher=null}
+  if(fbRoomRef){try{fbRoomRef.remove()}catch(e){}fbRoomRef=null}
+  if(myLobbyKey){try{window.firebase&&window.firebase.database().ref('lobby/'+myLobbyKey).remove()}catch(e){}myLobbyKey=null}
 }
-function showJoinUI(){
+function renderConnectedStatus(roleLabel){
+  const oc=document.getElementById('online-content');oc.innerHTML='';
+  const s=document.createElement('div');s.className='online-status';
+  s.innerHTML='<div class="online-dot connected"></div>';s.appendChild(document.createTextNode('Connecté !'));oc.appendChild(s);
+  const r=document.createElement('div');r.className='online-role';r.textContent=roleLabel;oc.appendChild(r);
+  const dBtn=document.createElement('button');dBtn.className='online-btn';
+  dBtn.style.cssText='margin-top:6px;background:var(--bg4);border:1px solid var(--border3);color:var(--text2)';
+  dBtn.textContent='Déconnecter';dBtn.onclick=disconnectOnline;oc.appendChild(dBtn);
+}
+function showOnlineError(msg){
+  const c=document.getElementById('online-content');if(!c)return;c.innerHTML='';
+  const err=document.createElement('div');err.style.cssText='color:var(--p1);font-size:11px';
+  err.textContent='⚠️ '+sanitizeText(msg);c.appendChild(err);
+  const btn=document.createElement('button');btn.className='online-btn';btn.style.marginTop='6px';
+  btn.textContent='Retour';btn.onclick=()=>_startOnlineFlow();c.appendChild(btn);
+}
+function _setOnlineStatus(msg,cls){
+  const oc=document.getElementById('online-content');oc.innerHTML='';
+  const s=document.createElement('div');s.className='online-status';
+  s.innerHTML='<div class="online-dot '+cls+'"></div>';s.appendChild(document.createTextNode(msg));oc.appendChild(s);
+}
+
+// ══════════════════════════════════════════════════════
+// ONLINE — Partie Privée (Hôte)
+// ══════════════════════════════════════════════════════
+function hostGame(){
+  destroyPeer();
+  const code='MRP-'+Math.random().toString(36).substr(2,6).toUpperCase();
+  _setOnlineStatus('Initialisation…','waiting');
   const oc=document.getElementById('online-content');
-  oc.innerHTML='';
-  const role=document.createElement('div');role.className='online-role';role.textContent='JOUEUR 2 (INVITÉ)';oc.appendChild(role);
-  const inp=document.createElement('input');inp.className='online-input';inp.id='join-code-input';inp.maxLength=12;inp.placeholder='CODE';
+  peer=new Peer(code,{host:PEER_HOST,port:PEER_PORT,path:PEER_PATH,secure:true});
+  peer.on('open',id=>{
+    onlineRole='p1';oc.innerHTML='';
+    const s=document.createElement('div');s.className='online-status';
+    s.innerHTML='<div class="online-dot waiting"></div>';s.appendChild(document.createTextNode('En attente d\'un joueur…'));oc.appendChild(s);
+    const role=document.createElement('div');role.className='online-role';role.textContent='HÔTE PRIVÉ — JOUEUR 1';oc.appendChild(role);
+    const cd=document.createElement('div');cd.className='code-display';cd.textContent=id;oc.appendChild(cd);
+    const row=document.createElement('div');row.style.cssText='display:flex;gap:6px;margin-top:4px';
+    const cp=document.createElement('button');cp.className='online-btn';cp.textContent='📋 Copier le code';
+    cp.onclick=()=>copyCode(id);row.appendChild(cp);
+    const cancel=document.createElement('button');cancel.className='online-btn';
+    cancel.style.cssText='background:var(--bg4);border:1px solid var(--border3);color:var(--text3)';
+    cancel.textContent='Annuler';cancel.onclick=()=>{destroyPeer();_startOnlineFlow()};
+    row.appendChild(cancel);oc.appendChild(row);
+  });
+  peer.on('connection',c=>{
+    conn=c;setupConn();onlineMode=true;
+    renderConnectedStatus('JOUEUR 1 (HÔTE PRIVÉ)');
+    startFresh();setStatus('En ligne · Vous êtes J1');
+  });
+  peer.on('error',err=>showOnlineError(err.message));
+}
+
+// ══════════════════════════════════════════════════════
+// ONLINE — Partie Privée (Rejoindre)
+// ══════════════════════════════════════════════════════
+function showJoinUI(){
+  const oc=document.getElementById('online-content');oc.innerHTML='';
+  const role=document.createElement('div');role.className='online-role';role.textContent='REJOINDRE PAR CODE';oc.appendChild(role);
+  const inp=document.createElement('input');inp.className='online-input';inp.id='join-code-input';
+  inp.maxLength=12;inp.placeholder='CODE EX: MRP-ABC123';
   inp.addEventListener('input',()=>{inp.value=sanitizeCode(inp.value)});
   oc.appendChild(inp);
-  const row=document.createElement('div');row.style.cssText='display:flex;gap:8px;margin-top:6px';
+  const row=document.createElement('div');row.style.cssText='display:flex;gap:6px;margin-top:8px';
   const jBtn=document.createElement('button');jBtn.className='online-btn';jBtn.textContent='Rejoindre';jBtn.onclick=joinGame;
-  const cBtn=document.createElement('button');cBtn.className='online-btn';cBtn.style.cssText='background:var(--bg4);border:1px solid var(--border3);color:var(--text2)';cBtn.textContent='Annuler';cBtn.onclick=renderOnlineWelcome;
+  const cBtn=document.createElement('button');cBtn.className='online-btn';
+  cBtn.style.cssText='background:var(--bg4);border:1px solid var(--border3);color:var(--text2)';
+  cBtn.textContent='Annuler';cBtn.onclick=()=>_startOnlineFlow();
   row.appendChild(jBtn);row.appendChild(cBtn);oc.appendChild(row);
   const msg=document.createElement('div');msg.className='online-msg';msg.id='join-msg';msg.style.marginTop='6px';oc.appendChild(msg);
 }
@@ -2289,215 +2399,163 @@ function joinGame(){
   const code=sanitizeCode(raw);
   if(code.length<3){document.getElementById('join-msg').textContent='Code invalide';return}
   document.getElementById('join-msg').textContent='Connexion…';destroyPeer();
-  loadPeerJS(()=>{
-    peer=new Peer(undefined,{host:PEER_HOST,port:PEER_PORT,path:PEER_PATH,secure:true});
-    peer.on('open',()=>{
-      conn=peer.connect(code,{reliable:true});
-      conn.on('open',()=>{
-        onlineMode=true;onlineRole='p2';setupConn();
-        const oc=document.getElementById('online-content');oc.innerHTML='';
-        const s=document.createElement('div');s.className='online-status';
-        s.innerHTML='<div class="online-dot connected"></div>';s.appendChild(document.createTextNode('Connecté !'));oc.appendChild(s);
-        const r=document.createElement('div');r.className='online-role';r.textContent='JOUEUR 2';oc.appendChild(r);
-        const dBtn=document.createElement('button');dBtn.className='online-btn';dBtn.style.cssText='background:var(--bg4);border:1px solid var(--border3);color:var(--text2)';dBtn.textContent='Déconnecter';dBtn.onclick=disconnectOnline;oc.appendChild(dBtn);
-        conn.send({type:'hello'});setStatus('En ligne · Vous êtes J2');
-      });
-      conn.on('error',err=>showOnlineError(String(err)));
+  peer=new Peer(undefined,{host:PEER_HOST,port:PEER_PORT,path:PEER_PATH,secure:true});
+  peer.on('open',()=>{
+    conn=peer.connect(code,{reliable:true});
+    conn.on('open',()=>{
+      onlineMode=true;onlineRole='p2';setupConn();
+      renderConnectedStatus('JOUEUR 2 (INVITÉ PRIVÉ)');
+      conn.send({type:'hello'});setStatus('En ligne · Vous êtes J2');
     });
-    peer.on('error',err=>{
-      const jm=document.getElementById('join-msg');
-      if(jm)jm.textContent='Erreur: '+sanitizeText(err.message);
-      else showOnlineError(sanitizeText(err.message));
-    });
+    conn.on('error',err=>showOnlineError(String(err)));
+  });
+  peer.on('error',err=>{
+    const jm=document.getElementById('join-msg');
+    if(jm)jm.textContent='Erreur: '+sanitizeText(err.message);
+    else showOnlineError(sanitizeText(err.message));
   });
 }
 
-// ─── Option B : Recherche Publique via Firebase RTDB ──
-// Le flux : chaque joueur publie son peerId dans /lobby/{id}.
-// Un watcher détecte un autre joueur → l'un devient hôte (Math.random).
-// L'hôte choisit les règles et envoie un token de connexion à l'invité.
-let fbLoaded=false,fbWatcher=null,myLobbyKey=null;
-
-function renderPublicSearch(){
-  const oc=document.getElementById('online-content');
-  oc.innerHTML='';
-  const title=document.createElement('div');title.className='online-role';title.textContent='RECHERCHE PUBLIQUE';oc.appendChild(title);
-  const desc=document.createElement('div');desc.style.cssText='font-size:11px;color:var(--text3);margin:6px 0 10px';
-  desc.textContent='Recherche un adversaire disponible…';oc.appendChild(desc);
-  const st=document.createElement('div');st.className='online-status';st.id='pub-status';
-  st.innerHTML='<div class="online-dot waiting"></div>';st.appendChild(document.createTextNode('Connexion au lobby…'));oc.appendChild(st);
-  const cBtn=document.createElement('button');cBtn.className='online-btn';cBtn.style.cssText='margin-top:8px;background:var(--bg4);border:1px solid var(--border3);color:var(--text3)';cBtn.textContent='Annuler';cBtn.onclick=()=>{cleanFbRoom();renderOnlineWelcome()};oc.appendChild(cBtn);
-  loadPeerJS(()=>loadFirebase(()=>startPublicSearch()));
-}
-
-function loadFirebase(cb){
-  if(fbLoaded){cb();return}
-  const s=document.createElement('script');
-  s.src='https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js';
-  s.onload=()=>{
-    const s2=document.createElement('script');
-    s2.src='https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js';
-    s2.onload=()=>{
-      // Configuration Firebase (base de données publique de matchmaking uniquement)
-      if(!window.firebase.apps.length){
-        window.firebase.initializeApp({
-          apiKey:'AIzaSyD_morpion3d4d_matchmaking_public',
-          databaseURL:FB_URL,
-          projectId:'morpion3d4d'
-        });
-      }
-      fbLoaded=true;cb();
-    };
-    s2.onerror=()=>showOnlineError('Firebase indisponible');
-    document.head.appendChild(s2);
-  };
-  s.onerror=()=>showOnlineError('Firebase indisponible');
-  document.head.appendChild(s);
-}
-
-function startPublicSearch(){
+// ══════════════════════════════════════════════════════
+// ONLINE — Partie Publique (Hôte)
+// Publie dans Firebase avec les règles choisies en Setup
+// ══════════════════════════════════════════════════════
+function hostPublicGame(){
   destroyPeer();
+  _setOnlineStatus('Création de la partie…','waiting');
   peer=new Peer(undefined,{host:PEER_HOST,port:PEER_PORT,path:PEER_PATH,secure:true});
   peer.on('open',myId=>{
+    onlineRole='p1';
     const db=window.firebase.database();
     const lobbyRef=db.ref('lobby');
-    // Publie dans le lobby (peerId + timestamp pour auto-nettoyage)
-    const myRef=lobbyRef.push({peerId:myId,ts:Date.now()});
-    myLobbyKey=myRef.key;
-    fbRoomRef=myRef;
-    // Nettoyage si le joueur quitte la page
+    const hostName='Joueur'+Math.floor(Math.random()*9000+1000);
+    const entry={peerId:myId,hostName,dim:setupDim,rules:setupRules,ts:Date.now()};
+    const myRef=lobbyRef.push(entry);
+    myLobbyKey=myRef.key;fbRoomRef=myRef;
     myRef.onDisconnect().remove();
-
-    // Cherche un autre joueur dans le lobby (exclude soi-même)
-    fbWatcher=lobbyRef.on('value',snap=>{
-      const entries=[];
-      snap.forEach(c=>{if(c.key!==myLobbyKey)entries.push({key:c.key,...c.val()})});
-      if(!entries.length)return; // pas encore d'adversaire
-      // Prend l'entrée la plus ancienne comme adversaire
-      const opponent=entries[0];
-      // Stoppe le watcher pour éviter les doublons
-      lobbyRef.off('value',fbWatcher);fbWatcher=null;
-      // Tirage : qui est hôte ?
-      const iAmHost=Math.random()>0.5;
-      if(iAmHost){
-        // Hôte : retire l'adversaire du lobby, se connecte à lui, propose les règles
-        db.ref('lobby/'+opponent.key).remove();
-        myRef.remove();myLobbyKey=null;
-        becomePublicHost(opponent.peerId);
-      } else {
-        // Invité : attend que l'hôte se connecte via PeerJS
-        myRef.remove();myLobbyKey=null;
-        becomePublicGuest();
-      }
-    });
-    updatePubStatus('En attente d\'un adversaire…');
+    const oc=document.getElementById('online-content');oc.innerHTML='';
+    const role=document.createElement('div');role.className='online-role';role.textContent='HÔTE PUBLIC — EN ATTENTE';oc.appendChild(role);
+    const info=document.createElement('div');info.style.cssText='font-size:11px;color:var(--text3);margin:4px 0 8px';
+    info.textContent='Partie: '+setupDim.toUpperCase()+' · '+(setupRules==='score'?'Score':'Classique')+' · ID: '+hostName;
+    oc.appendChild(info);
+    document.getElementById('pub-badge-text').textContent='En attente… ('+setupDim.toUpperCase()+' · '+(setupRules==='score'?'Score':'Classique')+')';
+    document.getElementById('public-host-badge').classList.add('show');
+    const cancel=document.createElement('button');cancel.className='online-btn';
+    cancel.style.cssText='background:var(--bg4);border:1px solid var(--border3);color:var(--text3)';
+    cancel.textContent='Annuler';cancel.onclick=cancelPublicHost;oc.appendChild(cancel);
   });
   peer.on('connection',c=>{
-    // Cas : l'autre joueur est devenu hôte et se connecte
-    conn=c;setupConn();onlineMode=true;onlineRole='p2';
+    conn=c;setupConn();onlineMode=true;
     cleanFbRoom();
-    renderConnectedStatus('JOUEUR 2 (PUBLIC)');
-    setStatus('En ligne · Partie publique · J2');
+    document.getElementById('public-host-badge').classList.remove('show');
+    renderConnectedStatus('JOUEUR 1 (HÔTE PUBLIC)');
+    startFresh();setStatus('En ligne · Partie publique · J1');
   });
-  peer.on('error',err=>showOnlineError(sanitizeText(err.message)));
+  peer.on('error',err=>{
+    document.getElementById('public-host-badge').classList.remove('show');
+    showOnlineError(err.message);
+  });
+}
+function cancelPublicHost(){
+  cleanFbRoom();destroyPeer();
+  document.getElementById('public-host-badge').classList.remove('show');
+  _startOnlineFlow();
 }
 
-function becomePublicHost(opponentPeerId){
-  onlineRole='p1';
-  // Affiche le choix des règles avant de connecter
+// ══════════════════════════════════════════════════════
+// ONLINE — Partie Publique (Rejoindre — liste des lobbies)
+// ══════════════════════════════════════════════════════
+let _lobbyJoining=false;
+
+function showPublicLobby(){
+  destroyPeer();_lobbyJoining=false;
   const oc=document.getElementById('online-content');oc.innerHTML='';
-  const title=document.createElement('div');title.className='online-role';title.style.color='var(--gold)';title.textContent='VOUS ÊTES L\'HÔTE — Choisissez les règles';oc.appendChild(title);
-  const desc=document.createElement('div');desc.style.cssText='font-size:11px;color:var(--text3);margin:6px 0 10px';desc.textContent='Un adversaire est trouvé ! Définissez les règles avant de lancer.';oc.appendChild(desc);
-  // Dimension
-  const dTitle=document.createElement('div');dTitle.className='settings-title';dTitle.textContent='DIMENSION';oc.appendChild(dTitle);
-  const dRow=document.createElement('div');dRow.style.cssText='display:flex;gap:6px;margin-bottom:8px';
-  ['3D','4D'].forEach(d=>{
-    const b=document.createElement('button');b.className='online-btn';b.style.flex='1';b.textContent=d;
-    b.style.background=setupDim===(d.toLowerCase())?'var(--accent)':'var(--bg4)';
-    b.style.border='1px solid var(--border3)';b.style.color='var(--text)';
-    b.onclick=()=>{selectDim(d.toLowerCase());Array.from(dRow.children).forEach(x=>x.style.background='var(--bg4)');b.style.background='var(--accent)'};
-    dRow.appendChild(b);
-  });oc.appendChild(dRow);
-  // Règles
-  const rTitle=document.createElement('div');rTitle.className='settings-title';rTitle.textContent='RÈGLES';oc.appendChild(rTitle);
-  const rRow=document.createElement('div');rRow.style.cssText='display:flex;gap:6px;margin-bottom:12px';
-  [{v:'score',l:'🏅 Score'},{v:'classic',l:'⚡ Classique'}].forEach(({v,l})=>{
-    const b=document.createElement('button');b.className='online-btn';b.style.flex='1';b.textContent=l;
-    b.style.background=setupRules===v?'var(--accent)':'var(--bg4)';b.style.border='1px solid var(--border3)';b.style.color='var(--text)';
-    b.onclick=()=>{selectRules(v);Array.from(rRow.children).forEach(x=>x.style.background='var(--bg4)');b.style.background='var(--accent)'};
-    rRow.appendChild(b);
-  });oc.appendChild(rRow);
-  // Lancer
-  const launchBtn=document.createElement('button');launchBtn.className='online-btn';launchBtn.style.cssText='width:100%;background:var(--p2d)';launchBtn.textContent='▶ Lancer la partie';
-  launchBtn.onclick=()=>{
-    conn=peer.connect(opponentPeerId,{reliable:true});
+  const role=document.createElement('div');role.className='online-role';role.textContent='PARTIES DISPONIBLES';oc.appendChild(role);
+  const hint=document.createElement('div');hint.style.cssText='font-size:11px;color:var(--text3);margin:4px 0';
+  hint.textContent='Cliquez sur "Rejoindre" sur la partie qui vous convient.';oc.appendChild(hint);
+  const cancel=document.createElement('button');cancel.className='online-btn';
+  cancel.style.cssText='margin-top:4px;background:var(--bg4);border:1px solid var(--border3);color:var(--text3)';
+  cancel.textContent='Annuler';cancel.onclick=()=>{cleanFbLobbyWatch();_startOnlineFlow()};oc.appendChild(cancel);
+  document.getElementById('lobby-list-wrap').classList.add('show');
+  _watchLobby();
+}
+function cleanFbLobbyWatch(){
+  if(fbWatcher){try{window.firebase.database().ref('lobby').off('value',fbWatcher)}catch(e){}fbWatcher=null}
+  document.getElementById('lobby-list-wrap').classList.remove('show');
+  document.getElementById('lobby-entries').innerHTML='';
+}
+function _watchLobby(){
+  const db=window.firebase.database();
+  const lobbyRef=db.ref('lobby').orderByChild('ts');
+  fbWatcher=lobbyRef.on('value',snap=>{
+    const entries=[];
+    snap.forEach(c=>{entries.push({key:c.key,...c.val()})});
+    _renderLobbyEntries(entries);
+  });
+}
+function _renderLobbyEntries(entries){
+  const container=document.getElementById('lobby-entries');
+  const countEl=document.getElementById('lobby-count');
+  container.innerHTML='';
+  const now=Date.now();
+  const fresh=entries.filter(e=>e.ts&&(now-e.ts)<300000);
+  if(countEl)countEl.textContent=fresh.length+' partie'+(fresh.length!==1?'s':'');
+  if(!fresh.length){
+    const empty=document.createElement('div');empty.className='lobby-empty';
+    empty.textContent='Aucune partie en attente…';container.appendChild(empty);return;
+  }
+  fresh.forEach(e=>{
+    const div=document.createElement('div');div.className='lobby-entry';
+    const dimLabel=e.dim==='4d'?'🌌 Hypercube 4D':'🎲 Cube 3D';
+    const rulesLabel=e.rules==='score'?'🏅 Score':'⚡ Classique';
+    const elapsed=Math.round((now-e.ts)/1000);
+    const elapsedStr=elapsed<60?elapsed+'s':''+Math.round(elapsed/60)+'min';
+    div.innerHTML='<div class="lobby-entry-info"><div class="lobby-entry-name">'+sanitizeText(e.hostName||'Joueur???')+'</div><div class="lobby-entry-rules">'+dimLabel+' &nbsp;·&nbsp; <span>'+rulesLabel+'</span> &nbsp;·&nbsp; '+elapsedStr+'</div></div>';
+    const btn=document.createElement('button');btn.className='lobby-join-btn';btn.textContent='Rejoindre';
+    btn.onclick=()=>joinPublicGame(e.key,e.peerId,e.dim,e.rules);
+    div.appendChild(btn);container.appendChild(div);
+  });
+}
+function joinPublicGame(roomKey,peerId,dim,rules){
+  if(_lobbyJoining)return;_lobbyJoining=true;
+  cleanFbLobbyWatch();
+  selectDim(dim||'4d');selectRules(rules||'score');
+  const oc=document.getElementById('online-content');oc.innerHTML='';
+  const st=document.createElement('div');st.className='online-status';
+  st.innerHTML='<div class="online-dot waiting"></div>';st.appendChild(document.createTextNode('Connexion à la partie…'));oc.appendChild(st);
+  try{window.firebase.database().ref('lobby/'+roomKey).remove()}catch(e){}
+  peer=new Peer(undefined,{host:PEER_HOST,port:PEER_PORT,path:PEER_PATH,secure:true});
+  peer.on('open',()=>{
+    conn=peer.connect(peerId,{reliable:true});
     conn.on('open',()=>{
-      onlineMode=true;
-      // Envoie les règles choisies par l'hôte
-      conn.send({type:'hostRules',dim:setupDim,rules:setupRules});
-      setupConn();
-      renderConnectedStatus('JOUEUR 1 (HÔTE PUBLIC)');
-      startFresh();setStatus('En ligne · Partie publique · J1');
+      onlineMode=true;onlineRole='p2';setupConn();
+      renderConnectedStatus('JOUEUR 2 (INVITÉ PUBLIC)');
+      conn.send({type:'hello'});setStatus('En ligne · Partie publique · J2');
     });
-    conn.on('error',err=>showOnlineError(sanitizeText(String(err))));
-  };
-  oc.appendChild(launchBtn);
+    conn.on('error',err=>{_lobbyJoining=false;showOnlineError(String(err))});
+  });
+  peer.on('error',err=>{_lobbyJoining=false;showOnlineError(sanitizeText(err.message))});
 }
 
-function becomePublicGuest(){
-  updatePubStatus('Adversaire trouvé ! En attente de la connexion de l\'hôte…');
-  // peer.on('connection') déjà déclaré dans startPublicSearch → gère la connexion entrante
-}
-
-function cleanFbRoom(){
-  if(fbWatcher){try{window.firebase&&window.firebase.database().ref('lobby').off('value',fbWatcher)}catch(e){}fbWatcher=null}
-  if(fbRoomRef){try{fbRoomRef.remove()}catch(e){}fbRoomRef=null}
-  if(myLobbyKey){try{window.firebase&&window.firebase.database().ref('lobby/'+myLobbyKey).remove()}catch(e){}myLobbyKey=null}
-}
-
-function updatePubStatus(msg){
-  const el=document.getElementById('pub-status');
-  if(el){while(el.lastChild&&el.lastChild.nodeType===3)el.removeChild(el.lastChild);el.appendChild(document.createTextNode(msg))}
-}
-
-function renderConnectedStatus(roleLabel){
-  const oc=document.getElementById('online-content');oc.innerHTML='';
-  const s=document.createElement('div');s.className='online-status';
-  s.innerHTML='<div class="online-dot connected"></div>';s.appendChild(document.createTextNode('Connecté !'));oc.appendChild(s);
-  const r=document.createElement('div');r.className='online-role';r.textContent=roleLabel;oc.appendChild(r);
-  const dBtn=document.createElement('button');dBtn.className='online-btn';dBtn.style.cssText='margin-top:6px;background:var(--bg4);border:1px solid var(--border3);color:var(--text2)';dBtn.textContent='Déconnecter';dBtn.onclick=disconnectOnline;oc.appendChild(dBtn);
-}
-
-// ─── Gestionnaire de données PeerJS sécurisé ──────────
+// ══════════════════════════════════════════════════════
+// ONLINE — setupConn (gestionnaire sécurisé)
+// ══════════════════════════════════════════════════════
 function setupConn(){
   conn.on('data',d=>{
-    // ① Rate-limiting : ignore si trop de messages reçus
-    if(!peerRateLimitOk()){console.warn('[SEC] PeerJS rate limit exceeded');return}
-    // ② Valide le type de message (string, whitelist)
+    if(!peerRateLimitOk()){console.warn('[SEC] rate limit');return}
     if(!d||typeof d!=='object'||typeof d.type!=='string')return;
-    const ALLOWED_TYPES=['move','reset','hello','sync','chat','hostRules'];
-    if(!ALLOWED_TYPES.includes(d.type))return;
-
+    const ALLOWED=['move','reset','hello','sync','chat'];
+    if(!ALLOWED.includes(d.type))return;
     if(d.type==='move'){
-      // ③ Valide que le joueur a le droit de jouer
-      if(onlineRole==='p1'&&currentPlayer!==2)return; // J1 ne peut pas jouer à la place de J2
+      if(onlineRole==='p1'&&currentPlayer!==2)return;
       if(onlineRole==='p2'&&currentPlayer!==1)return;
-      // ④ Valide les coordonnées (entiers [0-2])
-      if(!validateMoveData(d)){console.warn('[SEC] Invalid move data received');return}
+      if(!validateMoveData(d)){console.warn('[SEC] bad move');return}
       if(d.mode==='3d')commitPlay3(d.x|0,d.y|0,d.z|0);
       else if(d.mode==='4d')commitPlay4(d.x|0,d.y|0,d.z|0,d.w|0);
     }
     else if(d.type==='reset'){startFresh()}
     else if(d.type==='hello'&&onlineRole==='p1'){conn.send({type:'sync',mode})}
-    else if(d.type==='sync'){/* reserved */}
-    else if(d.type==='hostRules'){
-      // Reçu par l'invité public : applique les règles de l'hôte (valeurs whitelistées)
-      const dim=['3d','4d'].includes(d.dim)?d.dim:'4d';
-      const rules=['score','classic'].includes(d.rules)?d.rules:'score';
-      selectDim(dim);selectRules(rules);
-    }
     else if(d.type==='chat'){
-      // ⑤ XSS : utilise textContent — jamais innerHTML pour les données reçues
       if(typeof d.msg!=='string')return;
       addChatMsg(d.msg,'them');
     }
@@ -2509,39 +2567,26 @@ function setupConn(){
   document.getElementById('chat-box').classList.add('show');
   document.getElementById('chat-msgs').innerHTML='';
 }
-
 function sendOnlineMove(data){if(conn&&conn.open)conn.send({type:'move',...data})}
-
-function showOnlineError(msg){
-  const c=document.getElementById('online-content');if(!c)return;
-  c.innerHTML='';
-  const err=document.createElement('div');err.style.cssText='color:var(--p1);font-size:11px';
-  err.textContent='⚠️ '+sanitizeText(msg); // textContent : sûr
-  c.appendChild(err);
-  const btn=document.createElement('button');btn.className='online-btn';btn.style.marginTop='6px';btn.textContent='Retour';btn.onclick=renderOnlineWelcome;
-  c.appendChild(btn);
-}
-
 function copyCode(code){
   const safeCode=sanitizeCode(code);
   navigator.clipboard.writeText(safeCode).then(()=>{
-    // event.target peut ne pas être défini — on cherche le bouton copier
-    const btns=document.querySelectorAll('.online-btn');
-    btns.forEach(b=>{if(b.textContent.includes('Copier')){b.textContent='✓ Copié !';setTimeout(()=>b.textContent='📋 Copier',2000)}});
+    document.querySelectorAll('.online-btn').forEach(b=>{if(b.textContent.includes('Copier')){b.textContent='✓ Copié !';setTimeout(()=>b.textContent='📋 Copier le code',2000)}});
   }).catch(()=>prompt('Code:',safeCode));
 }
-
 function disconnectOnline(silent){
-  cleanFbRoom();destroyPeer();onlineMode=false;onlineRole=null;
-  if(!silent){renderOnlineWelcome()}
+  cleanFbRoom();cleanFbLobbyWatch&&cleanFbLobbyWatch();destroyPeer();
+  onlineMode=false;onlineRole=null;
+  document.getElementById('public-host-badge').classList.remove('show');
+  document.getElementById('lobby-list-wrap').classList.remove('show');
+  if(!silent){_startOnlineFlow()}
   else{
-    const c=document.getElementById('online-content');if(!c)return;
-    c.innerHTML='';
+    const c=document.getElementById('online-content');if(!c)return;c.innerHTML='';
     const msg=document.createElement('div');msg.className='online-msg';msg.textContent='Déconnecté.';c.appendChild(msg);
-    const btn=document.createElement('button');btn.className='online-btn';btn.style.marginTop='6px';btn.textContent='Retour';btn.onclick=renderOnlineWelcome;c.appendChild(btn);
+    const btn=document.createElement('button');btn.className='online-btn';btn.style.marginTop='6px';
+    btn.textContent='Retour';btn.onclick=()=>_startOnlineFlow();c.appendChild(btn);
   }
 }
-
 let peerJSLoaded=false;
 function loadPeerJS(cb){
   if(peerJSLoaded){cb();return}
@@ -2551,29 +2596,44 @@ function loadPeerJS(cb){
   s.onerror=()=>showOnlineError('Impossible de charger PeerJS');
   document.head.appendChild(s);
 }
-
-/**
- * addChatMsg — SÉCURITÉ : utilise uniquement textContent, jamais innerHTML.
- * Les messages reçus d'un pair ne doivent JAMAIS être interprétés comme du HTML.
- */
+function loadFirebase(cb){
+  if(fbLoaded){cb();return}
+  const s=document.createElement('script');
+  s.src='https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js';
+  s.onload=()=>{
+    const s2=document.createElement('script');
+    s2.src='https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js';
+    s2.onload=()=>{
+      if(!window.firebase.apps.length){
+        window.firebase.initializeApp({
+          apiKey:'AIzaSyPublicMatchmakingOnlyNoSecretNeeded',
+          databaseURL:FB_URL,
+          projectId:'morpion3det4d'
+        });
+      }
+      fbLoaded=true;cb();
+    };
+    s2.onerror=()=>showOnlineError('Firebase indisponible');
+    document.head.appendChild(s2);
+  };
+  s.onerror=()=>showOnlineError('Firebase indisponible');
+  document.head.appendChild(s);
+}
 function addChatMsg(msg,side){
   const msgs=document.getElementById('chat-msgs');
-  const d=document.createElement('div');
-  d.className='chat-msg '+side;
-  // textContent = aucune exécution possible, même si msg contient <script>
+  const d=document.createElement('div');d.className='chat-msg '+side;
   d.textContent=(side==='me'?'Vous':'Adversaire')+': '+String(msg).slice(0,200);
-  msgs.appendChild(d);
-  msgs.scrollTop=msgs.scrollHeight;
+  msgs.appendChild(d);msgs.scrollTop=msgs.scrollHeight;
 }
-
 function sendChat(){
-  const inp=document.getElementById('chat-input');
-  const msg=inp.value.trim().slice(0,200);
-  if(!msg)return;
-  addChatMsg(msg,'me');
-  if(conn&&conn.open)conn.send({type:'chat',msg});
-  inp.value='';
+  const inp=document.getElementById('chat-input');const msg=inp.value.trim().slice(0,200);
+  if(!msg)return;addChatMsg(msg,'me');
+  if(conn&&conn.open)conn.send({type:'chat',msg});inp.value='';
 }
+// Legacy stubs
+function renderOnlineWelcome(){if(typeof _startOnlineFlow==='function')_startOnlineFlow()}
+function toggleOnline(){}
+
 
 // ══════════════════════════════════════════════════════
 // MODE ADMINISTRATEUR
